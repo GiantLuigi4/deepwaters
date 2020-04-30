@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "lit=true":  { "model": "deepwaters:block/redstonetorch/redstone_torch" },
+        "lit=false":  { "model": "deepwaters:block/redstonetorch/redstone_torch_off" }
+    }
+}

@@ -11,7 +11,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.*;
 import net.minecraft.world.storage.loot.conditions.EntityHasProperty;
@@ -50,26 +49,40 @@ public class DeepWatersLootTables extends LootTableProvider
 	}
 
 	@Override
-	protected void validate(Map<ResourceLocation, LootTable> map, ValidationResults validationresults)
+	protected void validate(Map<ResourceLocation, LootTable> map, ValidationTracker validationresults)
 	{
 
 	}
 
 	public static List<RegistryObject<Block>> NormalItemDropBlocks = new ArrayList<>();
 
-	public static class 	Blocks extends DeepWatersBlockLootTableProvider
+	public static class Blocks extends DeepWatersBlockLootTableProvider
 	{
 		@Override
 		protected void addTables()
 		{
-			for (RegistryObject<Block> block : NormalItemDropBlocks) {
+			for (RegistryObject<Block> block : NormalItemDropBlocks)
+			{
 				dropSelf(block);
 			}
 			dropWithSilk(DeepWatersBlocks.MOSSY_OCEAN_FLOOR, DeepWatersBlocks.OCEAN_FLOOR);
+			dropSelf(DeepWatersBlocks.DEADWOOD_DOOR);
+			dropSelf(DeepWatersBlocks.SCRAP_DOOR);
+			dropSelf(DeepWatersBlocks.AQUA_STONE);
+			dropSelf(DeepWatersBlocks.AQUA_COMPARE);
+			dropSelf(DeepWatersBlocks.AQUA_REPEAT);
+			dropSelf(DeepWatersBlocks.AQUA_BLOCK);
+			dropSelf(DeepWatersBlocks.AQUA_TORCH);
+			dropSelf(DeepWatersBlocks.AQUA_TORCH_WALL);
+			dropSelf(DeepWatersBlocks.AQUA_STONE_BUTTON);
+			dropSelf(DeepWatersBlocks.SUNKEN_WASTES_LAMP);
 			dropSelf(DeepWatersBlocks.PORTAL_PILLAR);
+			dropSelf(DeepWatersBlocks.DEADWOOD_LOG);
 			dropWithSilk(DeepWatersBlocks.ACTIVATED_PORTAL_PILLAR, DeepWatersBlocks.PORTAL_PILLAR);
 
 			dropWithFortune(DeepWatersBlocks.SALT_ORE, DeepWatersItems.SALT_CRYSTAL);
+			dropWithFortune(DeepWatersBlocks.CRYSTALINE_CORAL, DeepWatersItems.CRYSTALINE_CORAL);
+			dropWithFortune(DeepWatersBlocks.DEAD_CRYSTALINE_CORAL, DeepWatersItems.DEAD_CRYSTALINE_CORAL);
 		}
 
 		@Override
@@ -88,7 +101,6 @@ public class DeepWatersLootTables extends LootTableProvider
 		{
 			this.registerLootTable(DeepWatersEntities.KILLER_WIGGLER.get(), LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(DeepWatersItems.PRISMARINE_INGOT.get()).acceptFunction(SetCount.builder(RandomValueRange.of(1F, 3F)))).acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(1F, 2F))).acceptCondition(KilledByPlayer.builder())));
 			this.registerLootTable(DeepWatersEntities.BLUFFERFISH.get(), LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(DeepWatersItems.BLUFFERFISH.get()).acceptFunction(SetCount.builder(ConstantRange.of(1))).acceptFunction(Smelt.func_215953_b().acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE))).acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F))))));
-			this.registerLootTable(DeepWatersEntities.CLAM.get(), LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(DeepWatersItems.PEARL.get()).acceptFunction(SetCount.builder(RandomValueRange.of(0F, 1F)))).acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))));
 			this.registerLootTable(DeepWatersEntities.STING_RAY.get(), LootTable.builder());
 			this.registerLootTable(DeepWatersEntities.BABY_KRACKEN.get(), LootTable.builder());
 			this.registerLootTable(DeepWatersEntities.MUCK_GULPER.get(), LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(ItemLootEntry.builder(DeepWatersItems.MUCK_GULPER.get()).acceptFunction(SetCount.builder(ConstantRange.of(1))).acceptFunction(Smelt.func_215953_b().acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE))).acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F))))));

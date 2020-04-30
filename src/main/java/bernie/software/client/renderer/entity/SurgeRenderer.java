@@ -1,11 +1,12 @@
 package bernie.software.client.renderer.entity;
 
 import bernie.software.client.renderer.model.SurgeModel;
-import bernie.software.entity.vehicle.SurgeVehicle;
+import bernie.software.entity.SurgeVehicle;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -22,22 +23,20 @@ public class SurgeRenderer extends MobRenderer<SurgeVehicle, SurgeModel>
 
 	@Nullable
 	@Override
-	protected ResourceLocation getEntityTexture(SurgeVehicle entity)
+	public ResourceLocation getEntityTexture(SurgeVehicle entity)
 	{
 		return new ResourceLocation("deepwaters" + ":textures/model/entity/surge_default.png");
 	}
 
 	@Override
-	protected void applyRotations(SurgeVehicle entityLiving, float ageInTicks, float rotationYaw, float partialTicks)
-	{
-		super.applyRotations(entityLiving, ageInTicks, rotationYaw, partialTicks);
+	protected void applyRotations(SurgeVehicle entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 	}
 
 	@Override
-	public void doRender(SurgeVehicle entity, double x, double y, double z, float entityYaw, float partialTicks)
-	{
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
-
-
+	public void render(SurgeVehicle entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+		GlStateManager.pushMatrix();
+		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+		GlStateManager.popMatrix();
 	}
 }

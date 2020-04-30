@@ -1,6 +1,8 @@
 package bernie.software.world.layer;
 
 import bernie.software.registry.DeepWatersBiomes;
+import bernie.software.utils.DeepWatersLayerUtil;
+import bernie.software.utils.misc.LazyInt;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
 
@@ -11,7 +13,8 @@ public class DeepWatersBiomeLayer implements IAreaTransformer0
 	private static final int RARE_BIOME_CHANCE = 16;
 	protected LazyInt[] commonBiomes = new LazyInt[]{
 			DeepWatersLayerUtil.lazyId(DeepWatersBiomes.CoralFieldsBiome),
-			DeepWatersLayerUtil.lazyId(DeepWatersBiomes.SunkenWastesBiome)
+			DeepWatersLayerUtil.lazyId(DeepWatersBiomes.SunkenWastesBiome),
+			DeepWatersLayerUtil.lazyId(DeepWatersBiomes.ThickKelpForest)
 
 	};
 	protected LazyInt[] uncommonBiomes = (new LazyInt[]{

@@ -20,7 +20,19 @@
   "block.deepwaters.magmatic_rock": "Magmatic Rock",
   "block.deepwaters.prismarine_block": "Prismarine Crystal Block",
   "block.deepwaters.aqualite_ore": "Aqualite Ore",
-
+  "block.deepwaters.salt_block": "Salt Block",
+  "block.deepwaters.portal_pillar": "Portal Pillar",
+  "block.deepwaters.activated_portal_pillar": "Activated Portal Pillar",
+  "block.deepwaters.dead_coral_block_orange": "Dead Goldenrod Coral Block",
+  "block.deepwaters.dead_coral_block_green": "Dead Green Coral Block",
+  "block.deepwaters.oxygenator": "Oxygenator",
+  "block.deepwaters.aquastone_torch": "Aquastone Torch",
+  "block.deepwaters.aquastone_block": "Aquastone Block",
+  "block.deepwaters.aquastone_repeater": "Aquastone Repeater",
+  "block.deepwaters.aquastone_comparator": "Aquastone Comparator",
+  "block.deepwaters.aquastone": "Aquastone Wire",
+  "block.deepwaters.aquastone_stone_button": "tile.null.name",
+  "item.deepwaters.prismarine_shield": "Prismarine Shield",
   "item.deepwaters.salt_crystal": "Salt Crystal",
   "item.deepwaters.pearl": "Pearl",
   "item.deepwaters.sharktooth": "Shark Tooth",
@@ -37,12 +49,10 @@
   "item.deepwaters.muck_gulper": "Muck Gulper",
   "item.deepwaters.cooked_muck_gulper": "Cooked Muck Gulper",
   "item.deepwaters.salted_muck_gulper": "Salted Muck Gulper",
-
   "item.deepwaters.prismarine_helmet": "Prismarine Helmet",
   "item.deepwaters.prismarine_chestplate": "Prismarine Chestplate",
   "item.deepwaters.prismarine_leggings": "Prismarine Leggings",
   "item.deepwaters.prismarine_boots": "Prismarine Boots",
-
   "item.deepwaters.killer_wiggler_spawn_egg": "Killer Wiggler Spawn Egg",
   "item.deepwaters.blufferfish_spawn_egg": "Blufferfish Spawn Egg",
   "item.deepwaters.clam_spawn_egg": "Clam Spawn Egg",
@@ -56,10 +66,8 @@
   "item.deepwaters.skull_fish_spawn_egg": "Skullfish Spawn Egg",
   "item.deepwaters.coral_crawler_spawn_egg": "Coral Crawler Spawn Egg",
   "item.deepwaters.jungle_fish_spawn_egg": "Jungle Fish Spawn Egg",
-
   "itemGroup.deepwaters_blocks": "Deep Waters Blocks",
   "itemGroup.deepwaters_items": "Deep Waters Items",
-
   "entity.deepwaters.killerwiggler": "Killer Wiggler",
   "entity.deepwaters.blufferfish": "Blufferfish",
   "entity.deepwaters.clam": "Clam",
@@ -71,6 +79,7 @@
   "entity.deepwaters.deepglider": "Deep Glider",
   "entity.deepwaters.legfish": "Legfish",
   "entity.deepwaters.colorfulfish": "Huefish",
-  "entity.deepwaters.coralcrawler": "Coral Crawler"
-
+  "entity.deepwaters.coralcrawler": "Coral Crawler",
+  "entity.deepwaters.surgevehicle": "Surge",
+  "feature .deepwaters.deepwatersportal": "Deep Waters Portal"
 }

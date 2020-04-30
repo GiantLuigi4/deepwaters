@@ -1,6 +1,4 @@
 # Gradle
-
-
 # Build your Java project and run tests with Gradle using a Gradle wrapper script.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
@@ -13,11 +11,25 @@ pool:
 
 variables:
   GRADLE_USER_HOME: $(Pipeline.Workspace)/.gradle
+  sdsds: dsd
 
 steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: 'Start-Sleep -Seconds 30'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      temp=$(git describe --tags --abbrev=0)
+      echo "##vso[task.setvariable variable=tag]$temp"
+      echo "$temp"
+      echo $temp
+
 - task: Cache@2
   inputs:
-    key: 'gradle | "$(Agent.OS)"'
+    key: 'version2 | gradle | "$(Agent.OS)"'
     restoreKeys: gradle
     path: $(GRADLE_USER_HOME)
   displayName: Gradle build cache
@@ -44,9 +56,31 @@ steps:
     targetPath: '$(Pipeline.Workspace)/s/build/libs/'
     publishLocation: 'pipeline'
 
-- task: fizzcode-discordhook@1
+- task: DiscordPublisher@1
   inputs:
-    DiscordChannelID: '696828133533548544'
-    DiscordToken: 'c2THSHw1v4x9Pmculi-WMIy6NEwxqkc28OcSanA83o7C6esOGVEkk7NHn9S2I8bAn133'
-    Title: 'New build: 1.1.$(Build.BuildId)'
-    Message: 'Download the build here: https://tincrayon.visualstudio.com/DeepWaters/_build/results?buildId=$(Build.BuildId)&view=artifacts&type=publishedArtifacts'
+    channelId: '$(wehook_id)'
+    webhookKey: '$(webhook_token)'
+    embeds: |
+      {
+        "embeds": [
+          {
+            "title": "Version $(tag)",
+            "url": "https://tincrayon.visualstudio.com/DeepWaters/_build/results?buildId=$(Build.BuildId)&view=artifacts&type=publishedArtifacts",
+
+            "description": "A new build was just created because of a push to the github.\nYou must install Minecraft 1.15.2 and all dependencies in order to run the mod.\n\n",
+            "color": 3120127,
+            "thumbnail": {
+              "url": "https://cdn.discordapp.com/icons/695117761956937779/4e5dde3ad1c8254fb27e8316cdc30a37.webp"
+            },
+      
+      
+            "fields": [
+              {
+                "name": "Dependencies:",
+                "value": "**Minecraft Forge** >= [31.0.0](https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.15.2.html)\n**Obfuscate Library** >= [0.4.2](https://www.curseforge.com/minecraft/mc-mods/obfuscate/files/2936616)"
+              }
+              
+            ]
+          }
+        ]
+      }

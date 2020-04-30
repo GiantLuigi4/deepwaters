@@ -39,7 +39,6 @@ public class DeepWatersItemModels extends DeepWatersItemModelProvider
 
 		normalItem(DeepWatersItems.SALT_CRYSTAL);
 		normalItem(DeepWatersItems.SHARK_TOOTH);
-		toolItem(DeepWatersItems.PEAL_WAND);
 		normalItem(DeepWatersItems.PEARL);
 		normalItem(DeepWatersItems.PRISMARINE_INGOT);
 		normalItem(DeepWatersItems.PRISMARINE_NUGGET);
@@ -52,16 +51,22 @@ public class DeepWatersItemModels extends DeepWatersItemModelProvider
 		normalItem(DeepWatersItems.SALTED_BLUFFERFISH);
 		normalItem(DeepWatersItems.MUCK_GULPER);
 		normalItem(DeepWatersItems.COOKED_MUCK_GULPER);
+		normalItem(DeepWatersItems.SALTED_MUCK_GULPER);
+		//normalItem(DeepWatersItems.AQUASTONE_TORCH);
 
 		toolItem(DeepWatersItems.PRISMARINE_SWORD);
+		toolItem(DeepWatersItems.AQUALITE_SWORD);
 		toolItem(DeepWatersItems.PRISMARINE_PICKAXE);
+		toolItem(DeepWatersItems.AQUALITE_PICKAXE);
 		toolItem(DeepWatersItems.PRISMARINE_AXE);
 		toolItem(DeepWatersItems.PRISMARINE_SHOVEL);
+		toolItem(DeepWatersItems.PEAL_WAND);
 		//toolItem(DeepWatersItems.PRISMARINE_SHIELD);
+
+		//normalItem(DeepWatersItems.POWER_STONE);
 
 		spawnEgg(DeepWatersItems.KILLER_WIGGLER_SPAWN_EGG);
 		spawnEgg(DeepWatersItems.BLUFFERFISH_SPAWN_EGG);
-		spawnEgg(DeepWatersItems.CLAM_SPAWN_EGG);
 		spawnEgg(DeepWatersItems.STING_RAY_SPAWN_EGG);
 		spawnEgg(DeepWatersItems.BABY_KRACKEN_SPAWN_EGG);
 		spawnEgg(DeepWatersItems.MUCK_GULPER_SPAWN_EGG);

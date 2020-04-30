@@ -1,52 +1,82 @@
 package bernie.software;
 
+import bernie.software.block.ThickKelpBlock;
+import bernie.software.block.aquastone.AquastoneColor;
 import bernie.software.datagen.DeepWatersBlockStates;
 import bernie.software.datagen.DeepWatersItemModels;
 import bernie.software.datagen.DeepWatersLootTables;
 import bernie.software.datagen.DeepWatersRecipes;
+import bernie.software.registry.DeepWatersContainerTypes;
+import bernie.software.gui.surge.OpenSurgeGuiPacket;
 import bernie.software.registry.*;
+import bernie.software.utils.network.NetBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(DeepWatersMod.ModID)
 public class DeepWatersMod
 {
-	public static Logger log;
+	public static Logger logger;
+	public static final String ModID = "deepwaters";
+	public static boolean noFogMod = false;
 
-	public DeepWatersMod() {
+	public static final SimpleChannel CHANNEL = new NetBuilder(new ResourceLocation(ModID, "main"))
+			.version(1).optionalServer().requiredClient()
+			.serverbound(OpenSurgeGuiPacket::new).consumer(() -> OpenSurgeGuiPacket::handle)
+			.build();
+
+	public DeepWatersMod()
+	{
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		log= LogManager.getLogger();
+		logger = LogManager.getLogger();
 
 		bus.addListener(this::setup);
-		bus.addListener(this::clientSetup);
 		bus.addListener(this::gatherData);
-
+		try {
+			if (Minecraft.getInstance()!=null) {
+				bus.addListener(this::clientSetup);
+			}
+		} catch (Exception err) {}
 		DeepWatersBiomes.BIOMES.register(bus);
 		DeepWatersBlocks.BLOCKS.register(bus);
 		DeepWatersItems.ITEMS.register(bus);
 		DeepWatersEntities.ENTITIES.register(bus);
 		DeepWatersWorldCarvers.WORLD_CARVERS.register(bus);
+		DeepWatersStructures.STRUCTURES.register(bus);
+		DeepWatersContainerTypes.CONTAINER_TYPES.register(bus);
+
 	}
 
-	public static final String ModID = "deepwaters";
+	@OnlyIn(Dist.CLIENT)
+	private void clientSetup(FMLClientSetupEvent event)
+	{
+		Minecraft.getInstance().getBlockColors().register(new AquastoneColor(), DeepWatersBlocks.AQUA_STONE.get());
+		Minecraft.getInstance().getBlockColors().register(new ThickKelpBlock.Colors(), DeepWatersBlocks.THICK_KELP.get());
+		ClientEvents.registerBlockRenderers();
+	}
 
-	public void setup(FMLCommonSetupEvent event) {
+	private void setup(FMLCommonSetupEvent event)
+	{
 		DeepWatersBiomes.addBiomeTypes();
+		DeepWatersEntities.spawnPlacements();
 	}
 
-	public void clientSetup(FMLClientSetupEvent event) {
 
-	}
-
-	public void gatherData(GatherDataEvent event) {
+	private void gatherData(GatherDataEvent event)
+	{
 		DataGenerator generator = event.getGenerator();
 
 		generator.addProvider(new DeepWatersRecipes(generator));

@@ -3,19 +3,28 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath "com.wynprice.cursemaven:CurseMaven:2.1.1"
     }
+}
+plugins {
+    id 'com.palantir.git-version' version '0.12.3'
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: "com.wynprice.cursemaven"
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+def details = versionDetails()
+version = details.lastTag
 group = 'bernie.software.deepwaters' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'DeepWatersMod'
+archivesBaseName = 'deepwaters-1.15.2'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -25,7 +34,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'stable', version: '56-1.14.3'
+    mappings channel: 'snapshot', version: '20200425-1.15.1'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -93,7 +102,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.14.4-28.2.3'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.49'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -178,5 +187,5 @@ repositories {
 }
 
 dependencies {
-    compile 'obfuscate:Obfuscate-0.3.3:1.14.4:deobf'
+    compile fg.deobf("curse.maven:obfuscate:2912283")
 }
